@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { SpeechRecognitionService } from '../../services/speech-recognition.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { OpenaiService } from '../../services/openai.service';
+import { OpenaiService } from '../../services/open-ai.service';
 
 @Component({
   selector: 'app-voice-to-text',
