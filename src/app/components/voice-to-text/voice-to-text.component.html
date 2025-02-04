@@ -2,7 +2,13 @@
     <h1>Voice to Text Converter</h1>
   
     <div class="transcript-box">
+      <h3>Transcript:</h3>
       <p>{{ transcript }}</p>
+    </div>
+
+    <div class="summary-box" *ngIf="chatGPTResponse ">
+      <h3>ChatGPT:</h3>
+      <p>{{ chatGPTResponse  }}</p>
     </div>
   
     <button (click)="startListening()">Start Listening</button>
