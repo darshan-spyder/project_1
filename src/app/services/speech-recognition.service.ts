@@ -1,4 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,9 @@ export class SpeechRecognitionService {
   isListening: boolean = false;
   finalTranscript: string = '';  // Store final transcript after stopping
 
-  constructor(private ngZone: NgZone) {
+  private deepAiApiKey = '34a25ff6-1efb-4ce7-8439-fe628b3fb5ca';  
+
+  constructor(private ngZone: NgZone, private http: HttpClient) {
     const { webkitSpeechRecognition }: any = window;
     this.recognition = new webkitSpeechRecognition();
     this.recognition.continuous = true;
@@ -45,5 +49,16 @@ export class SpeechRecognitionService {
 
   getFinalTranscript(): string {
     return this.finalTranscript;
+  }
+
+  summarizeText(text: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Api-Key': this.deepAiApiKey,
+      'Content-Type': 'application/json'
+    });
+
+    const body = { text: text };
+
+    return this.http.post('https://api.deepai.org/api/summarization', body, { headers });
   }
 }
